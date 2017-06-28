@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TDRPlugin</string>
+    <string name="tdl">東京ディズニーランド</string>
+    <string name="tds">東京ディズニーシー</string>
 </resources>

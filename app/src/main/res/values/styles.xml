@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TDLButton" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorControlHighlight">@color/md_pink_A100</item>
+        <item name="colorButtonNormal">@color/md_pink_500</item>
+    </style>
+
+    <style name="TDSButton" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="colorControlHighlight">@color/md_blue_A100</item>
+        <item name="colorButtonNormal">@color/md_blue_500</item>
+    </style>
 </resources>
