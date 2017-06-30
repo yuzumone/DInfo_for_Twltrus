@@ -2,26 +2,43 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
         >
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:theme="@style/TDLButton"
-            android:text="@string/tdl"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="8dp"
+            android:theme="@style/Toolbar"
             />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:theme="@style/TDSButton"
-            android:text="@string/tds"
-            />
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:layout_below="@+id/toolbar"
+            >
+
+            <Button
+                android:id="@+id/button_tdl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/TDLButton"
+                android:text="@string/tdl"
+                />
+
+            <Button
+                android:id="@+id/button_tds"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/TDSButton"
+                android:text="@string/tds"
+                />
+        </LinearLayout>
+    </RelativeLayout>
 </layout>
