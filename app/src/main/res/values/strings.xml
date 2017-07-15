@@ -2,4 +2,9 @@
     <string name="app_name">TDRPlugin</string>
     <string name="tdl">東京ディズニーランド</string>
     <string name="tds">東京ディズニーシー</string>
+    <string name="close">ただいま閉園しております</string>
+    <string name="show">ショー / パレード</string>
+    <string name="attraction">アトラクション</string>
+    <string name="restaurant">レストラン</string>
+    <string name="greeting">グリーティング</string>
 </resources>
