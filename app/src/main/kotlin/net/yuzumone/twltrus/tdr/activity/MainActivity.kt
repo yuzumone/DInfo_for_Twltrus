@@ -15,8 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
         binding.buttonTdl.setOnClickListener {
+            PagerActivity.createIntent(this, PagerActivity.Park.TDR)
         }
         binding.buttonTds.setOnClickListener {
+            PagerActivity.createIntent(this, PagerActivity.Park.TDS)
         }
     }
 }
