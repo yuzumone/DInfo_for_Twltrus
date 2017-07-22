@@ -13,16 +13,10 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import net.yuzumone.twltrus.tdr.R
 import net.yuzumone.twltrus.tdr.adapter.PagerAdapter
-import net.yuzumone.twltrus.tdr.api.AttractionApi
-import net.yuzumone.twltrus.tdr.api.GreetingApi
-import net.yuzumone.twltrus.tdr.api.RestaurantApi
-import net.yuzumone.twltrus.tdr.api.ShowApi
+import net.yuzumone.twltrus.tdr.api.*
 import net.yuzumone.twltrus.tdr.databinding.ActivityPagerBinding
 import net.yuzumone.twltrus.tdr.extension.convertArrayList
-import net.yuzumone.twltrus.tdr.fragment.AttractionFragment
-import net.yuzumone.twltrus.tdr.fragment.GreetingFragment
-import net.yuzumone.twltrus.tdr.fragment.RestaurantFragment
-import net.yuzumone.twltrus.tdr.fragment.ShowFragment
+import net.yuzumone.twltrus.tdr.fragment.*
 
 class PagerActivity : AppCompatActivity() {
 
@@ -66,18 +60,22 @@ class PagerActivity : AppCompatActivity() {
             val attractionJob = async(CommonPool) { AttractionApi.getTdl() }
             val restaurantJob = async(CommonPool) { RestaurantApi.getTdl() }
             val greetingJob = async(CommonPool) { GreetingApi.getTdl() }
+            val rehabJob = async(CommonPool) { RehabApi.getTdl() }
             val shows = showJob.await()
             val attractions = attractionJob.await()
             val restaurants = restaurantJob.await()
             val greetings = greetingJob.await()
+            val rehab = rehabJob.await()
             val showFragment = ShowFragment.newInstance(shows.convertArrayList())
             val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
             val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
             val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
+            val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
             adapter.add(getString(R.string.show), showFragment)
             adapter.add(getString(R.string.attraction), attractionFragment)
             adapter.add(getString(R.string.restaurant), restaurantFragment)
             adapter.add(getString(R.string.greeting), greetingFragment)
+            adapter.add(getString(R.string.rehab), rehabFragment)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -91,18 +89,22 @@ class PagerActivity : AppCompatActivity() {
             val attractionJob = async(CommonPool) { AttractionApi.getTds() }
             val restaurantJob = async(CommonPool) { RestaurantApi.getTds() }
             val greetingJob = async(CommonPool) { GreetingApi.getTds() }
+            val rehabJob = async(CommonPool) { RehabApi.getTds() }
             val shows = showJob.await()
             val attractions = attractionJob.await()
             val restaurants = restaurantJob.await()
             val greetings = greetingJob.await()
+            val rehab = rehabJob.await()
             val showFragment = ShowFragment.newInstance(shows.convertArrayList())
             val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
             val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
             val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
+            val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
             adapter.add(getString(R.string.show), showFragment)
             adapter.add(getString(R.string.attraction), attractionFragment)
             adapter.add(getString(R.string.restaurant), restaurantFragment)
             adapter.add(getString(R.string.greeting), greetingFragment)
+            adapter.add(getString(R.string.rehab), rehabFragment)
         } catch (e: Exception) {
             e.printStackTrace()
         }
