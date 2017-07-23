@@ -12,6 +12,7 @@ When installed it will be added to App Shortcuts.
 - Attraction wait times
 - Restaurant wait times
 - Greeting wait times
+- Temporary closure of park facilities
 
 ## Libraries
 This project uses some libraries.
