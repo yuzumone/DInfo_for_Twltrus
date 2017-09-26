@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId "net.yuzumone.twltrus.tdr"
         minSdkVersion 25
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0.0"
     }
