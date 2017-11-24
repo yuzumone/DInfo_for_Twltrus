@@ -29,7 +29,7 @@ android {
     }
 }
 
-ext.support_lib_version = '26.0.1'
+ext.support_lib_version = '26.1.0'
 ext.coroutines_version = '0.16'
 
 dependencies {
