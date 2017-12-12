@@ -17,6 +17,7 @@ import net.yuzumone.twltrus.tdr.api.*
 import net.yuzumone.twltrus.tdr.databinding.ActivityPagerBinding
 import net.yuzumone.twltrus.tdr.extension.convertArrayList
 import net.yuzumone.twltrus.tdr.fragment.*
+import net.yuzumone.twltrus.tdr.model.Park
 
 class PagerActivity : AppCompatActivity() {
 
@@ -119,10 +120,5 @@ class PagerActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    enum class Park {
-        TDR,
-        TDS
     }
 }
