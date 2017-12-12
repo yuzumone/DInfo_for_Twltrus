@@ -28,11 +28,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getStatus() = launch(UI) {
-        val tdlJob = async { StatusApi.getTdlStatus() }
-        val tdsJob = async { StatusApi.getTdsStatus() }
-        val tdlStatus = tdlJob.await()
-        val tdsStatus = tdsJob.await()
-        binding.textTdlStatus.text = tdlStatus
-        binding.textTdsStatus.text = tdsStatus
+        try {
+            val tdlJob = async { StatusApi.getTdlStatus() }
+            val tdsJob = async { StatusApi.getTdsStatus() }
+            val tdlStatus = tdlJob.await()
+            val tdsStatus = tdsJob.await()
+            binding.textTdlStatus.text = tdlStatus
+            binding.textTdsStatus.text = tdsStatus
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
