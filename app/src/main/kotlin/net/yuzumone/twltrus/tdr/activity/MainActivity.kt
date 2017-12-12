@@ -9,6 +9,7 @@ import kotlinx.coroutines.experimental.launch
 import net.yuzumone.twltrus.tdr.R
 import net.yuzumone.twltrus.tdr.api.StatusApi
 import net.yuzumone.twltrus.tdr.databinding.ActivityMainBinding
+import net.yuzumone.twltrus.tdr.model.Park
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,10 +21,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         getStatus()
         binding.buttonTdl.setOnClickListener {
-            PagerActivity.createIntent(this, PagerActivity.Park.TDR)
+            PagerActivity.createIntent(this, Park.TDR)
         }
         binding.buttonTds.setOnClickListener {
-            PagerActivity.createIntent(this, PagerActivity.Park.TDS)
+            PagerActivity.createIntent(this, Park.TDS)
         }
     }
 
