@@ -57,26 +57,35 @@ class PagerActivity : AppCompatActivity() {
     private fun getTDL() = launch(UI) {
         binding.progress.visibility = View.VISIBLE
         try {
-            val showJob = async(CommonPool) { ShowApi.getTdl() }
-            val attractionJob = async(CommonPool) { AttractionApi.getTdl() }
-            val restaurantJob = async(CommonPool) { RestaurantApi.getTdl() }
-            val greetingJob = async(CommonPool) { GreetingApi.getTdl() }
-            val rehabJob = async(CommonPool) { RehabApi.getTdl() }
-            val shows = showJob.await()
-            val attractions = attractionJob.await()
-            val restaurants = restaurantJob.await()
-            val greetings = greetingJob.await()
-            val rehab = rehabJob.await()
-            val showFragment = ShowFragment.newInstance(shows.convertArrayList())
-            val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
-            val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
-            val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
-            val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
-            adapter.add(getString(R.string.show), showFragment)
-            adapter.add(getString(R.string.attraction), attractionFragment)
-            adapter.add(getString(R.string.restaurant), restaurantFragment)
-            adapter.add(getString(R.string.greeting), greetingFragment)
-            adapter.add(getString(R.string.rehab), rehabFragment)
+            val isClose = async { StatusApi.isCloseTdl() }.await()
+            if (isClose) {
+                val showFragment = ShowScheduleFragment.newInstance(park)
+                val rehab = async(CommonPool) { RehabApi.getTdl() }.await()
+                val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
+                adapter.add(getString(R.string.show), showFragment)
+                adapter.add(getString(R.string.rehab), rehabFragment)
+            } else {
+                val showJob = async(CommonPool) { ShowApi.getRealtimeTdl() }
+                val attractionJob = async(CommonPool) { AttractionApi.getTdl() }
+                val restaurantJob = async(CommonPool) { RestaurantApi.getTdl() }
+                val greetingJob = async(CommonPool) { GreetingApi.getTdl() }
+                val rehabJob = async(CommonPool) { RehabApi.getTdl() }
+                val shows = showJob.await()
+                val attractions = attractionJob.await()
+                val restaurants = restaurantJob.await()
+                val greetings = greetingJob.await()
+                val rehab = rehabJob.await()
+                val showFragment = ShowFragment.newInstance(shows.convertArrayList())
+                val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
+                val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
+                val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
+                val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
+                adapter.add(getString(R.string.show), showFragment)
+                adapter.add(getString(R.string.attraction), attractionFragment)
+                adapter.add(getString(R.string.restaurant), restaurantFragment)
+                adapter.add(getString(R.string.greeting), greetingFragment)
+                adapter.add(getString(R.string.rehab), rehabFragment)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -86,26 +95,35 @@ class PagerActivity : AppCompatActivity() {
     private fun getTDS() = launch(UI) {
         binding.progress.visibility = View.VISIBLE
         try {
-            val showJob = async(CommonPool) { ShowApi.getTds() }
-            val attractionJob = async(CommonPool) { AttractionApi.getTds() }
-            val restaurantJob = async(CommonPool) { RestaurantApi.getTds() }
-            val greetingJob = async(CommonPool) { GreetingApi.getTds() }
-            val rehabJob = async(CommonPool) { RehabApi.getTds() }
-            val shows = showJob.await()
-            val attractions = attractionJob.await()
-            val restaurants = restaurantJob.await()
-            val greetings = greetingJob.await()
-            val rehab = rehabJob.await()
-            val showFragment = ShowFragment.newInstance(shows.convertArrayList())
-            val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
-            val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
-            val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
-            val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
-            adapter.add(getString(R.string.show), showFragment)
-            adapter.add(getString(R.string.attraction), attractionFragment)
-            adapter.add(getString(R.string.restaurant), restaurantFragment)
-            adapter.add(getString(R.string.greeting), greetingFragment)
-            adapter.add(getString(R.string.rehab), rehabFragment)
+            val isClose = async { StatusApi.isCloseTds() }.await()
+            if (isClose) {
+                val showFragment = ShowScheduleFragment.newInstance(park)
+                val rehab = async(CommonPool) { RehabApi.getTds() }.await()
+                val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
+                adapter.add(getString(R.string.show), showFragment)
+                adapter.add(getString(R.string.rehab), rehabFragment)
+            } else {
+                val showJob = async(CommonPool) { ShowApi.getRealtimeTds() }
+                val attractionJob = async(CommonPool) { AttractionApi.getTds() }
+                val restaurantJob = async(CommonPool) { RestaurantApi.getTds() }
+                val greetingJob = async(CommonPool) { GreetingApi.getTds() }
+                val rehabJob = async(CommonPool) { RehabApi.getTds() }
+                val shows = showJob.await()
+                val attractions = attractionJob.await()
+                val restaurants = restaurantJob.await()
+                val greetings = greetingJob.await()
+                val rehab = rehabJob.await()
+                val showFragment = ShowFragment.newInstance(shows.convertArrayList())
+                val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
+                val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
+                val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
+                val rehabFragment = RehabFragment.newInstance(rehab.convertArrayList())
+                adapter.add(getString(R.string.show), showFragment)
+                adapter.add(getString(R.string.attraction), attractionFragment)
+                adapter.add(getString(R.string.restaurant), restaurantFragment)
+                adapter.add(getString(R.string.greeting), greetingFragment)
+                adapter.add(getString(R.string.rehab), rehabFragment)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
