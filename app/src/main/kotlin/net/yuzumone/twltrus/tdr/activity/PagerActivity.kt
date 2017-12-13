@@ -57,7 +57,7 @@ class PagerActivity : AppCompatActivity() {
     private fun getTDL() = launch(UI) {
         binding.progress.visibility = View.VISIBLE
         try {
-            val showJob = async(CommonPool) { ShowApi.getTdl() }
+            val showJob = async(CommonPool) { ShowApi.getRealtimeTdl() }
             val attractionJob = async(CommonPool) { AttractionApi.getTdl() }
             val restaurantJob = async(CommonPool) { RestaurantApi.getTdl() }
             val greetingJob = async(CommonPool) { GreetingApi.getTdl() }
@@ -86,7 +86,7 @@ class PagerActivity : AppCompatActivity() {
     private fun getTDS() = launch(UI) {
         binding.progress.visibility = View.VISIBLE
         try {
-            val showJob = async(CommonPool) { ShowApi.getTds() }
+            val showJob = async(CommonPool) { ShowApi.getRealtimeTds() }
             val attractionJob = async(CommonPool) { AttractionApi.getTds() }
             val restaurantJob = async(CommonPool) { RestaurantApi.getTds() }
             val greetingJob = async(CommonPool) { GreetingApi.getTds() }
