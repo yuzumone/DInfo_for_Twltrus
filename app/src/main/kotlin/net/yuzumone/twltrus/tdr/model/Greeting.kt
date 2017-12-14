@@ -8,35 +8,34 @@ data class Greeting(
         val left: String,
         val right: String,
         val wait: String,
+        val update: String,
         val url: String) : Parcelable {
 
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString()) {
+    constructor(source: Parcel) : this(
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString()
+    )
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeString(name)
+        writeString(left)
+        writeString(right)
+        writeString(wait)
+        writeString(update)
+        writeString(url)
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(left)
-        parcel.writeString(right)
-        parcel.writeString(wait)
-        parcel.writeString(url)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Greeting> {
-        override fun createFromParcel(parcel: Parcel): Greeting {
-            return Greeting(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Greeting?> {
-            return arrayOfNulls(size)
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<Greeting> = object : Parcelable.Creator<Greeting> {
+            override fun createFromParcel(source: Parcel): Greeting = Greeting(source)
+            override fun newArray(size: Int): Array<Greeting?> = arrayOfNulls(size)
         }
     }
 }

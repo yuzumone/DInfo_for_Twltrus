@@ -33,8 +33,10 @@ object AttractionApi {
             val waitTime = attraction.select("p.waitTime").text()
             val runTime = attraction.select("p.run").text()
             val fp = attraction.select("p.fp").text()
+            val update = attraction.select("p.update").text()
+                    .replace("^\\(|\\)\$".toRegex(), "")
             val url = attraction.select("a").attr("href")
-            Attraction(name, waitTime, runTime, fp, url)
+            Attraction(name, waitTime, runTime, fp, update, url)
         }
     }
 }

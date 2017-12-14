@@ -9,37 +9,36 @@ data class Restaurant(
         val run: String,
         val left: String,
         val right: String,
+        val update: String,
         val url: String) : Parcelable {
 
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString()) {
+    constructor(source: Parcel) : this(
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString()
+    )
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeString(name)
+        writeString(wait)
+        writeString(run)
+        writeString(left)
+        writeString(right)
+        writeString(update)
+        writeString(url)
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(wait)
-        parcel.writeString(run)
-        parcel.writeString(left)
-        parcel.writeString(right)
-        parcel.writeString(url)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Restaurant> {
-        override fun createFromParcel(parcel: Parcel): Restaurant {
-            return Restaurant(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Restaurant?> {
-            return arrayOfNulls(size)
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<Restaurant> = object : Parcelable.Creator<Restaurant> {
+            override fun createFromParcel(source: Parcel): Restaurant = Restaurant(source)
+            override fun newArray(size: Int): Array<Restaurant?> = arrayOfNulls(size)
         }
     }
 }

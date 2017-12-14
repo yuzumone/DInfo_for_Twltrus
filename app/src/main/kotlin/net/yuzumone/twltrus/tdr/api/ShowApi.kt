@@ -49,8 +49,10 @@ object ShowApi {
         return list.map { show ->
             val name = show.select("h3").text()
             val time = show.select("p.time").eachText().joinToString("\n")
+            val update = show.select("p.update").text()
+                    .replace("^\\(|\\)\$".toRegex(), "")
             val url = show.select("a").attr("href")
-            Show(name, time, url)
+            Show(name, time, update, url)
         }
     }
 }
