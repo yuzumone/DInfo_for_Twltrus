@@ -8,35 +8,34 @@ data class Attraction(
         val wait: String,
         val run: String,
         val fp: String,
+        val update: String,
         val url: String) : Parcelable {
 
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString()) {
+    constructor(source: Parcel) : this(
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString(),
+            source.readString()
+    )
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeString(name)
+        writeString(wait)
+        writeString(run)
+        writeString(fp)
+        writeString(update)
+        writeString(url)
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(wait)
-        parcel.writeString(run)
-        parcel.writeString(fp)
-        parcel.writeString(url)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Attraction> {
-        override fun createFromParcel(parcel: Parcel): Attraction {
-            return Attraction(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Attraction?> {
-            return arrayOfNulls(size)
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<Attraction> = object : Parcelable.Creator<Attraction> {
+            override fun createFromParcel(source: Parcel): Attraction = Attraction(source)
+            override fun newArray(size: Int): Array<Attraction?> = arrayOfNulls(size)
         }
     }
 }

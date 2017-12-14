@@ -7,29 +7,26 @@ data class Rehab(
         val name: String,
         val date: String,
         val url: String) : Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString()) {
+
+    constructor(source: Parcel) : this(
+            source.readString(),
+            source.readString(),
+            source.readString()
+    )
+
+    override fun describeContents() = 0
+
+    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
+        writeString(name)
+        writeString(date)
+        writeString(url)
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeString(date)
-        parcel.writeString(url)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Rehab> {
-        override fun createFromParcel(parcel: Parcel): Rehab {
-            return Rehab(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Rehab?> {
-            return arrayOfNulls(size)
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<Rehab> = object : Parcelable.Creator<Rehab> {
+            override fun createFromParcel(source: Parcel): Rehab = Rehab(source)
+            override fun newArray(size: Int): Array<Rehab?> = arrayOfNulls(size)
         }
     }
 }

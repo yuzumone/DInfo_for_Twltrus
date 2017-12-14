@@ -34,8 +34,10 @@ object RestaurantApi {
             val run = restaurant.select("p.run").text()
             val left = restaurant.select("div.op-left").text()
             val right = restaurant.select("div.op-right").text()
+            val update = restaurant.select("p.update").text()
+                    .replace("^\\(|\\)\$".toRegex(), "")
             val url = restaurant.select("a").attr("href")
-            Restaurant(name, waitTime, run, left, right, url)
+            Restaurant(name, waitTime, run, left, right, update, url)
         }
     }
 }

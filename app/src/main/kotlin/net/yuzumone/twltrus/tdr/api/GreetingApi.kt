@@ -33,8 +33,10 @@ object GreetingApi {
             val left = greeting.select("div.op-left").eachText().joinToString("\n")
             val right = greeting.select("div.op-right").eachText().joinToString("\n")
             val wait = greeting.select("p.waitTime").text()
+            val update = greeting.select("p.update").text()
+                    .replace("^\\(|\\)\$".toRegex(), "")
             val url = greeting.select("a").attr("href")
-            Greeting(name, left, right, wait, url)
+            Greeting(name, left, right, wait, update, url)
         }
     }
 }
