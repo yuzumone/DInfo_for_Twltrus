@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="atttraction"
+            name="attraction"
             type="net.yuzumone.twltrus.tdr.model.Attraction"/>
     </data>
 
@@ -20,7 +20,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{atttraction.name}"
+            android:text="@{attraction.name}"
             style="@style/TextAppearance.AppCompat.Title"
             />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_marginTop="8dp"
-            android:text="@{atttraction.run}"
+            android:text="@{attraction.run}"
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -39,8 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/run"
-            android:text="@{`FP: ` + atttraction.fp}"
-            android:visibility='@{atttraction.fp  == "" ? View.GONE : View.VISIBLE}'
+            android:text="@{`FP: ` + attraction.fp}"
+            android:visibility='@{attraction.fp  == "" ? View.GONE : View.VISIBLE}'
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:text="@{atttraction.wait}"
+            android:text="@{attraction.wait}"
             style="@style/TextAppearance.AppCompat.Headline"
             />
     </RelativeLayout>

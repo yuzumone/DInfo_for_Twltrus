@@ -26,7 +26,7 @@ class AttractionAdapter(context: Context) : ArrayAdapter<Attraction>(context, 0)
         } else {
             binding = view.tag as ListAttractionBinding
         }
-        binding.atttraction = getItem(position)
+        binding.attraction = getItem(position)
         return view!!
     }
 }
