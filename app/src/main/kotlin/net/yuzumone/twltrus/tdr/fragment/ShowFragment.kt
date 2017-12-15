@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.ListFragment
 import android.support.v4.content.ContextCompat
+import android.view.LayoutInflater
 import net.yuzumone.twltrus.tdr.R
 import net.yuzumone.twltrus.tdr.adapter.ShowAdapter
 import net.yuzumone.twltrus.tdr.model.Show
@@ -32,6 +33,10 @@ class ShowFragment : ListFragment() {
         adapter.addAll(shows)
         adapter.notifyDataSetChanged()
         listAdapter = adapter
+        if (shows.isEmpty()) {
+            val view = LayoutInflater.from(activity).inflate(R.layout.view_no_data, listView, false)
+            listView.addHeaderView(view)
+        }
         listView.setOnItemClickListener { parent, view, position, id ->
             val show = adapter.getItem(position)
             if (show.url != "") {

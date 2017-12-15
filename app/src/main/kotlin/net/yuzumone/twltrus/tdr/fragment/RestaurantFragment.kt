@@ -34,7 +34,7 @@ class RestaurantFragment : ListFragment() {
         adapter.notifyDataSetChanged()
         listAdapter = adapter
         if (restaurants.isEmpty()) {
-            val view = LayoutInflater.from(activity).inflate(R.layout.view_close, listView, false)
+            val view = LayoutInflater.from(activity).inflate(R.layout.view_no_data, listView, false)
             listView.addHeaderView(view)
         }
         listView.setOnItemClickListener { parent, view, position, id ->
