@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -87,7 +88,7 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.rehab), rehabFragment)
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            Toast.makeText(this@PagerActivity, R.string.no_data, Toast.LENGTH_SHORT).show()
         }
         binding.progress.visibility = View.GONE
     }
@@ -125,7 +126,7 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.rehab), rehabFragment)
             }
         } catch (e: Exception) {
-            e.printStackTrace()
+            Toast.makeText(this@PagerActivity, R.string.no_data, Toast.LENGTH_SHORT).show()
         }
         binding.progress.visibility = View.GONE
     }
