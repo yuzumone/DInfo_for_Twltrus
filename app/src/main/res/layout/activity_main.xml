@@ -50,7 +50,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
             android:layout_below="@id/container_button"
-            android:text="東京ディズニーランド"
+            android:text="@string/tdl"
             android:textColor="@color/md_pink_500"
             style="@style/TextAppearance.AppCompat.Title"
             />
@@ -74,7 +74,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
             android:layout_below="@+id/text_tdl_status"
-            android:text="東京ディズニーシー"
+            android:text="@string/tds"
             android:textColor="@color/md_blue_500"
             style="@style/TextAppearance.AppCompat.Title"
             />
