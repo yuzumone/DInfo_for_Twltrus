@@ -46,7 +46,7 @@ class PagerActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.pager.adapter = adapter
         binding.tab.setupWithViewPager(binding.pager)
-        if (park == Park.TDR) {
+        if (park == Park.TDL) {
             setTitle(R.string.tdl)
             getTDL()
         } else if (park == Park.TDS) {
