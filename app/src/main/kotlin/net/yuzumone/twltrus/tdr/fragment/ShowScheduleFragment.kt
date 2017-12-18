@@ -81,7 +81,7 @@ class ShowScheduleFragment : Fragment() {
 
     private fun getSchedule(date: Date) {
         binding.textDate.text = format.format(date)
-        if (park == Park.TDR) {
+        if (park == Park.TDL) {
             getTdl(date)
         } else if (park == Park.TDS) {
             getTds(date)

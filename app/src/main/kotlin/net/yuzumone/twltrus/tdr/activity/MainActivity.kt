@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         getStatus()
         binding.buttonTdl.setOnClickListener {
-            PagerActivity.createIntent(this, Park.TDR)
+            PagerActivity.createIntent(this, Park.TDL)
         }
         binding.buttonTds.setOnClickListener {
             PagerActivity.createIntent(this, Park.TDS)
