@@ -1,5 +1,6 @@
 package net.yuzumone.twltrus.tdr.api
 
+import net.yuzumone.twltrus.tdr.extension.regularHeader
 import net.yuzumone.twltrus.tdr.model.Greeting
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
@@ -16,13 +17,13 @@ object GreetingApi {
             "&lat=35.6329$randomLat&lng=139.8840$randomLng"
 
     fun getTdl(): List<Greeting> {
-        val doc = Jsoup.connect(tdlUrl).followRedirects(true).get()
+        val doc = Jsoup.connect(tdlUrl).followRedirects(true).regularHeader().get()
         val list = doc.select("#greeting > section > article.greeting > li")
         return analysis(list)
     }
 
     fun getTds(): List<Greeting> {
-        val doc = Jsoup.connect(tdsUrl).followRedirects(true).get()
+        val doc = Jsoup.connect(tdsUrl).followRedirects(true).regularHeader().get()
         val list = doc.select("#greeting > section > article.greeting > li")
         return analysis(list)
     }
