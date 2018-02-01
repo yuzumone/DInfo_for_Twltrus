@@ -12,8 +12,8 @@ android {
         applicationId "net.yuzumone.twltrus.tdr"
         minSdkVersion 25
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
     }
     buildTypes {
         release {
