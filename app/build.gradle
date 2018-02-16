@@ -3,14 +3,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     dataBinding {
         enabled = true
     }
     defaultConfig {
         applicationId "net.yuzumone.twltrus.tdr"
         minSdkVersion 25
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 5
         versionName "1.0.4"
     }
