@@ -29,7 +29,7 @@ class ShowScheduleFragment : Fragment() {
         SimpleDateFormat("yyyy/MM/dd (E)")
     }
     private val park: Park by lazy {
-        arguments.getSerializable(ARG_PARK) as Park
+        arguments!!.getSerializable(ARG_PARK) as Park
     }
 
     companion object {
@@ -43,7 +43,7 @@ class ShowScheduleFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_show_schedule, container, false)
         initView()
         getSchedule(date)
@@ -51,13 +51,13 @@ class ShowScheduleFragment : Fragment() {
     }
 
     private fun initView() {
-        adapter = ShowAdapter(activity)
+        adapter = ShowAdapter(activity!!)
         binding.list.adapter = adapter
         binding.list.setOnItemClickListener { adapterView, view, position, id ->
             val show = adapter.getItem(position)
             if (show.url != "") {
                 val intent = CustomTabsIntent.Builder()
-                        .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
+                        .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
                 intent.launchUrl(activity, Uri.parse(show.url))
             }

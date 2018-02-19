@@ -13,7 +13,7 @@ import net.yuzumone.twltrus.tdr.model.Restaurant
 class RestaurantFragment : ListFragment() {
 
     private val restaurants: ArrayList<Restaurant> by lazy {
-        arguments.getParcelableArrayList<Restaurant>(ARG_RESTAURANTS)
+        arguments!!.getParcelableArrayList<Restaurant>(ARG_RESTAURANTS)
     }
 
     companion object {
@@ -29,7 +29,7 @@ class RestaurantFragment : ListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val adapter = RestaurantAdapter(activity)
+        val adapter = RestaurantAdapter(activity!!)
         adapter.addAll(restaurants)
         adapter.notifyDataSetChanged()
         listAdapter = adapter
@@ -41,7 +41,7 @@ class RestaurantFragment : ListFragment() {
             val restaurant = adapter.getItem(position)
             if (restaurant.url != "") {
                 val intent = CustomTabsIntent.Builder()
-                        .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
+                        .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
                 intent.launchUrl(activity, Uri.parse(restaurant.url))
             }
