@@ -12,7 +12,7 @@ import net.yuzumone.twltrus.tdr.model.Rehab
 class RehabFragment : ListFragment() {
 
     private val shows: ArrayList<Rehab> by lazy {
-        arguments.getParcelableArrayList<Rehab>(ARG_REHAB)
+        arguments!!.getParcelableArrayList<Rehab>(ARG_REHAB)
     }
 
     companion object {
@@ -28,7 +28,7 @@ class RehabFragment : ListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val adapter = RehabAdapter(activity)
+        val adapter = RehabAdapter(activity!!)
         adapter.addAll(shows)
         adapter.notifyDataSetChanged()
         listAdapter = adapter
@@ -36,7 +36,7 @@ class RehabFragment : ListFragment() {
             val rehab = adapter.getItem(position)
             if (rehab.url != "") {
                 val intent = CustomTabsIntent.Builder()
-                        .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
+                        .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
                 intent.launchUrl(activity, Uri.parse(rehab.url))
             }

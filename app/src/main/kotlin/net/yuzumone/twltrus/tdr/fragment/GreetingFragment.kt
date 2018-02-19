@@ -13,7 +13,7 @@ import net.yuzumone.twltrus.tdr.model.Greeting
 class GreetingFragment : ListFragment() {
 
     private val greetings: ArrayList<Greeting> by lazy {
-        arguments.getParcelableArrayList<Greeting>(ARG_GREETINGS)
+        arguments!!.getParcelableArrayList<Greeting>(ARG_GREETINGS)
     }
 
     companion object {
@@ -29,7 +29,7 @@ class GreetingFragment : ListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val adapter = GreetingAdapter(activity)
+        val adapter = GreetingAdapter(activity!!)
         adapter.addAll(greetings)
         adapter.notifyDataSetChanged()
         listAdapter = adapter
@@ -41,7 +41,7 @@ class GreetingFragment : ListFragment() {
             val greeting = adapter.getItem(position)
             if (greeting.url != "") {
                 val intent = CustomTabsIntent.Builder()
-                        .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
+                        .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
                 intent.launchUrl(activity, Uri.parse(greeting.url))
             }

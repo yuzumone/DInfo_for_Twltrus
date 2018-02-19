@@ -13,7 +13,7 @@ import net.yuzumone.twltrus.tdr.model.Show
 class ShowFragment : ListFragment() {
 
     private val shows: ArrayList<Show> by lazy {
-        arguments.getParcelableArrayList<Show>(ARG_SHOWS)
+        arguments!!.getParcelableArrayList<Show>(ARG_SHOWS)
     }
 
     companion object {
@@ -29,7 +29,7 @@ class ShowFragment : ListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val adapter = ShowAdapter(activity)
+        val adapter = ShowAdapter(activity!!)
         adapter.addAll(shows)
         adapter.notifyDataSetChanged()
         listAdapter = adapter
@@ -41,7 +41,7 @@ class ShowFragment : ListFragment() {
             val show = adapter.getItem(position)
             if (show.url != "") {
                 val intent = CustomTabsIntent.Builder()
-                        .setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
+                        .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
                 intent.launchUrl(activity, Uri.parse(show.url))
             }
