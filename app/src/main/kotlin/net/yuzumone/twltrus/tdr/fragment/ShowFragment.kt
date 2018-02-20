@@ -17,7 +17,7 @@ class ShowFragment : ListFragment() {
     }
 
     companion object {
-        val ARG_SHOWS = "shows"
+        private const val ARG_SHOWS = "shows"
         fun newInstance(shows: ArrayList<Show>): ShowFragment {
             return ShowFragment().apply {
                 arguments = Bundle().apply {

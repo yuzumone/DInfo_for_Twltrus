@@ -16,7 +16,7 @@ class RehabFragment : ListFragment() {
     }
 
     companion object {
-        val ARG_REHAB = "rehab"
+        private const val ARG_REHAB = "rehab"
         fun newInstance(rehab: ArrayList<Rehab>): RehabFragment {
             return RehabFragment().apply {
                 arguments = Bundle().apply {
