@@ -17,7 +17,7 @@ class AttractionFragment : ListFragment() {
     }
 
     companion object {
-        val ARG_ATTRACTIONS = "attractions"
+        private const val ARG_ATTRACTIONS = "attractions"
         fun newInstance(attractions: ArrayList<Attraction>): AttractionFragment {
             return AttractionFragment().apply {
                 arguments = Bundle().apply {
