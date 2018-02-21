@@ -26,4 +26,10 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         titles.add(title)
         notifyDataSetChanged()
     }
+
+    fun clear() {
+        fragments.clear()
+        titles.clear()
+        notifyDataSetChanged()
+    }
 }
