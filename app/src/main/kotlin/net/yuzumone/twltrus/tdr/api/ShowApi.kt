@@ -20,17 +20,17 @@ object ShowApi {
 
     fun getTdl(date: Date): List<Show> {
         val format = SimpleDateFormat("yyyyMMdd").format(date)
-        val url = "http://info.tokyodisneyresort.jp/s/daily_schedule/show/tdl_$format.html"
+        val url = "http://www.tokyodisneyresort.jp/tdl/daily/show/$format/"
         val doc = Jsoup.connect(url).followRedirects(true).regularHeader().get()
-        val list = doc.select("#greeting > li")
+        val list = doc.select("div.section-list > div > ul > li")
         return analysis(list)
     }
 
     fun getTds(date: Date): List<Show> {
         val format = SimpleDateFormat("yyyyMMdd").format(date)
-        val url = "http://info.tokyodisneyresort.jp/s/daily_schedule/show/tds_$format.html"
+        val url = "http://www.tokyodisneyresort.jp/tds/daily/show/$format/"
         val doc = Jsoup.connect(url).followRedirects(true).regularHeader().get()
-        val list = doc.select("#greeting > li")
+        val list = doc.select("div.section-list > div > ul > li")
         return analysis(list)
     }
 
@@ -49,11 +49,12 @@ object ShowApi {
     private fun analysis(list: Elements): List<Show> {
         return list.map { show ->
             val name = show.select("h3").text()
-            val time = show.select("p.time").eachText().joinToString("\n")
+            val time = show.select("div.timeTable").eachText().joinToString("\n")
             val update = show.select("p.update").text()
                     .replace("^\\(|\\)\$".toRegex(), "")
             val url = show.select("a").attr("href")
-            Show(name, time, update, url)
+            val link = "http://www.tokyodisneyresort.jp$url"
+            Show(name, time, update, link)
         }
     }
 }
