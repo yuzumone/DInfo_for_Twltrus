@@ -7,26 +7,28 @@ import org.jsoup.select.Elements
 
 object RehabApi {
 
-    private val url = "http://info.tokyodisneyresort.jp/schedule/stop/stop_list.html"
+    private const val tdlUrl = "http://www.tokyodisneyresort.jp/tdl/monthly/stop.html"
+    private const val tdsUrl = "http://www.tokyodisneyresort.jp/tds/monthly/stop.html"
 
     fun getTdl(): List<Rehab> {
-        val doc = Jsoup.connect(url).followRedirects(true).regularHeader().get()
-        val list = doc.select("section.tdl > dl > dd > ul> li")
+        val doc = Jsoup.connect(tdlUrl).followRedirects(true).regularHeader().get()
+        val list = doc.select("div.linkList6 > ul > li")
         return analysis(list)
     }
 
     fun getTds(): List<Rehab> {
-        val doc = Jsoup.connect(url).followRedirects(true).regularHeader().get()
-        val list = doc.select("section.tds > dl > dd > ul> li")
+        val doc = Jsoup.connect(tdsUrl).followRedirects(true).regularHeader().get()
+        val list = doc.select("div.linkList6 > ul > li")
         return analysis(list)
     }
 
     private fun analysis(list: Elements): List<Rehab> {
         return list.map { rehab ->
-            val name = if (rehab.select("a").text() != "") rehab.select("a").text() else rehab.select("p").text()
-            val date = rehab.select("span").text()
+            val name = rehab.select("p:not(.date)").text()
+            val date = rehab.select("p.date").text()
             val url = rehab.select("a").attr("href")
-            Rehab(name, date, url)
-        }
+            val link = "http://www.tokyodisneyresort.jp$url"
+            Rehab(name, date, link)
+        }.filter { it.name != "休止を予定しているものはありません。" }
     }
 }
