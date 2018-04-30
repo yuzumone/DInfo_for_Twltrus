@@ -10,7 +10,7 @@ import net.yuzumone.twltrus.tdr.R
 import net.yuzumone.twltrus.tdr.adapter.ShowAdapter
 import net.yuzumone.twltrus.tdr.model.Show
 
-class ShowFragment : ListFragment() {
+class RealtimeShowFragment : ListFragment() {
 
     private val shows: ArrayList<Show> by lazy {
         arguments!!.getParcelableArrayList<Show>(ARG_SHOWS)
@@ -18,8 +18,8 @@ class ShowFragment : ListFragment() {
 
     companion object {
         private const val ARG_SHOWS = "shows"
-        fun newInstance(shows: ArrayList<Show>): ShowFragment {
-            return ShowFragment().apply {
+        fun newInstance(shows: ArrayList<Show>): RealtimeShowFragment {
+            return RealtimeShowFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(ARG_SHOWS, shows)
                 }
