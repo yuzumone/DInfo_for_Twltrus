@@ -9,4 +9,5 @@
     <string name="rehab">リハブ</string>
     <string name="no_data">データが取得できませんでした</string>
     <string name="refresh">更新</string>
+    <string name="standby_time">%1$s 分</string>
 </resources>
