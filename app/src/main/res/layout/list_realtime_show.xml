@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="show"
+            type="net.yuzumone.twltrus.tdr.model.RealtimeShow"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        >
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{show.facilityName}"
+            style="@style/TextAppearance.AppCompat.Title"
+            />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_marginTop="8dp"
+            android:visibility='@{show.operatingHours == null ? View.GONE : View.VISIBLE}'
+            app:operatingHours="@{show.operatingHours}"
+            style="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <TextView
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/time"
+            android:text="@{`更新時間: ` + show.updateTime}"
+            style="@style/TextAppearance.AppCompat.Body1"
+            />
+    </RelativeLayout>
+</layout>

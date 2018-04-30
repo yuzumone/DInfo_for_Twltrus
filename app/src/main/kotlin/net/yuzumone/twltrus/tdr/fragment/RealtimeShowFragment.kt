@@ -7,19 +7,19 @@ import android.support.v4.app.ListFragment
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import net.yuzumone.twltrus.tdr.R
-import net.yuzumone.twltrus.tdr.adapter.ShowAdapter
-import net.yuzumone.twltrus.tdr.model.Show
+import net.yuzumone.twltrus.tdr.adapter.RealtimeShowAdapter
+import net.yuzumone.twltrus.tdr.model.RealtimeShow
 
-class ShowFragment : ListFragment() {
+class RealtimeShowFragment : ListFragment() {
 
-    private val shows: ArrayList<Show> by lazy {
-        arguments!!.getParcelableArrayList<Show>(ARG_SHOWS)
+    private val shows: ArrayList<RealtimeShow> by lazy {
+        arguments!!.getParcelableArrayList<RealtimeShow>(ARG_SHOWS)
     }
 
     companion object {
         private const val ARG_SHOWS = "shows"
-        fun newInstance(shows: ArrayList<Show>): ShowFragment {
-            return ShowFragment().apply {
+        fun newInstance(shows: ArrayList<RealtimeShow>): RealtimeShowFragment {
+            return RealtimeShowFragment().apply {
                 arguments = Bundle().apply {
                     putParcelableArrayList(ARG_SHOWS, shows)
                 }
@@ -29,7 +29,7 @@ class ShowFragment : ListFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val adapter = ShowAdapter(activity!!)
+        val adapter = RealtimeShowAdapter(activity!!)
         adapter.addAll(shows)
         adapter.notifyDataSetChanged()
         listAdapter = adapter
@@ -39,11 +39,11 @@ class ShowFragment : ListFragment() {
         }
         listView.setOnItemClickListener { parent, view, position, id ->
             val show = adapter.getItem(position)
-            if (show.url != "") {
+            if (show.FacilityURLSP != "") {
                 val intent = CustomTabsIntent.Builder()
                         .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
-                intent.launchUrl(activity, Uri.parse(show.url))
+                intent.launchUrl(activity, Uri.parse(show.FacilityURLSP))
             }
         }
     }

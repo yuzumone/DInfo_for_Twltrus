@@ -74,7 +74,7 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.show), showFragment)
                 adapter.add(getString(R.string.rehab), rehabFragment)
             } else {
-                val showJob = async(CommonPool) { ShowApi.getRealtimeTdl() }
+                val showJob = async(CommonPool) { ShowApi.getRealtimeTdl(pref.cookie) }
                 val attractionJob = async(CommonPool) { AttractionApi.getTdl(pref.cookie) }
                 val restaurantJob = async(CommonPool) { RestaurantApi.getTdl() }
                 val greetingJob = async(CommonPool) { GreetingApi.getTdl() }
@@ -84,7 +84,7 @@ class PagerActivity : AppCompatActivity() {
                 val restaurants = restaurantJob.await()
                 val greetings = greetingJob.await()
                 val rehab = rehabJob.await()
-                val showFragment = ShowFragment.newInstance(shows.convertArrayList())
+                val showFragment = RealtimeShowFragment.newInstance(shows.convertArrayList())
                 val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
                 val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
                 val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
@@ -112,7 +112,7 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.show), showFragment)
                 adapter.add(getString(R.string.rehab), rehabFragment)
             } else {
-                val showJob = async(CommonPool) { ShowApi.getRealtimeTds() }
+                val showJob = async(CommonPool) { ShowApi.getRealtimeTds(pref.cookie) }
                 val attractionJob = async(CommonPool) { AttractionApi.getTds(pref.cookie) }
                 val restaurantJob = async(CommonPool) { RestaurantApi.getTds() }
                 val greetingJob = async(CommonPool) { GreetingApi.getTds() }
@@ -122,7 +122,7 @@ class PagerActivity : AppCompatActivity() {
                 val restaurants = restaurantJob.await()
                 val greetings = greetingJob.await()
                 val rehab = rehabJob.await()
-                val showFragment = ShowFragment.newInstance(shows.convertArrayList())
+                val showFragment = RealtimeShowFragment.newInstance(shows.convertArrayList())
                 val attractionFragment = AttractionFragment.newInstance(attractions.convertArrayList())
                 val restaurantFragment = RestaurantFragment.newInstance(restaurants.convertArrayList())
                 val greetingFragment = GreetingFragment.newInstance(greetings.convertArrayList())
