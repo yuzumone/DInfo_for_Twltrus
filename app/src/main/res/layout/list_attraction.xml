@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <data>
@@ -20,7 +21,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{attraction.name}"
+            android:text="@{attraction.facilityName}"
             style="@style/TextAppearance.AppCompat.Title"
             />
 
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_marginTop="8dp"
-            android:text="@{attraction.run}"
+            android:text="@{attraction.operatingStatus}"
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -39,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/run"
-            android:text="@{`FP: ` + attraction.fp}"
-            android:visibility='@{attraction.fp  == "" ? View.GONE : View.VISIBLE}'
+            android:text="@{`FP: ` + attraction.fsStatus}"
+            android:visibility='@{attraction.fsStatus == null ? View.GONE : View.VISIBLE}'
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -49,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fp"
-            android:text="@{attraction.update}"
+            android:text="@{`更新時間: ` + attraction.updateTime}"
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -59,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:text="@{attraction.wait}"
+            android:visibility='@{attraction.standbyTime == "" ? View.GONE : View.VISIBLE}'
+            app:standby="@{attraction.standbyTime}"
             style="@style/TextAppearance.AppCompat.Headline"
             />
     </RelativeLayout>

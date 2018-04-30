@@ -2,40 +2,44 @@ package net.yuzumone.twltrus.tdr.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import net.yuzumone.twltrus.tdr.moshi.StandbyTime
 
 data class Attraction(
-        val name: String,
-        val wait: String,
-        val run: String,
-        val fp: String,
-        val update: String,
-        val url: String) : Parcelable {
+        val FacilityName: String,
+        val FacilityURLSP: String?,
+        @StandbyTime val StandbyTime: String?,
+        val UpdateTime: String,
+        val FsStatus: String?,
+        val OperatingStatus: String?
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString())
 
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString()
-    )
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeString(name)
-        writeString(wait)
-        writeString(run)
-        writeString(fp)
-        writeString(update)
-        writeString(url)
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(FacilityName)
+        parcel.writeString(FacilityURLSP)
+        parcel.writeString(StandbyTime)
+        parcel.writeString(UpdateTime)
+        parcel.writeString(FsStatus)
+        parcel.writeString(OperatingStatus)
     }
 
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<Attraction> = object : Parcelable.Creator<Attraction> {
-            override fun createFromParcel(source: Parcel): Attraction = Attraction(source)
-            override fun newArray(size: Int): Array<Attraction?> = arrayOfNulls(size)
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Attraction> {
+        override fun createFromParcel(parcel: Parcel): Attraction {
+            return Attraction(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Attraction?> {
+            return arrayOfNulls(size)
         }
     }
 }

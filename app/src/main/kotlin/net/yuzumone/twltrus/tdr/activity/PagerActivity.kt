@@ -20,6 +20,7 @@ import net.yuzumone.twltrus.tdr.databinding.ActivityPagerBinding
 import net.yuzumone.twltrus.tdr.extension.convertArrayList
 import net.yuzumone.twltrus.tdr.fragment.*
 import net.yuzumone.twltrus.tdr.model.Park
+import net.yuzumone.twltrus.tdr.utils.PrefUtil
 
 class PagerActivity : AppCompatActivity() {
 
@@ -30,6 +31,7 @@ class PagerActivity : AppCompatActivity() {
     private val adapter: PagerAdapter by lazy {
         PagerAdapter(supportFragmentManager)
     }
+    private val pref by lazy { PrefUtil(this) }
 
     companion object {
         private const val ARG_PARK = "park"
@@ -73,7 +75,7 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.rehab), rehabFragment)
             } else {
                 val showJob = async(CommonPool) { ShowApi.getRealtimeTdl() }
-                val attractionJob = async(CommonPool) { AttractionApi.getTdl() }
+                val attractionJob = async(CommonPool) { AttractionApi.getTdl(pref.cookie) }
                 val restaurantJob = async(CommonPool) { RestaurantApi.getTdl() }
                 val greetingJob = async(CommonPool) { GreetingApi.getTdl() }
                 val rehabJob = async(CommonPool) { RehabApi.getTdl() }
@@ -111,7 +113,7 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.rehab), rehabFragment)
             } else {
                 val showJob = async(CommonPool) { ShowApi.getRealtimeTds() }
-                val attractionJob = async(CommonPool) { AttractionApi.getTds() }
+                val attractionJob = async(CommonPool) { AttractionApi.getTds(pref.cookie) }
                 val restaurantJob = async(CommonPool) { RestaurantApi.getTds() }
                 val greetingJob = async(CommonPool) { GreetingApi.getTds() }
                 val rehabJob = async(CommonPool) { RehabApi.getTds() }
