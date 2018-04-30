@@ -39,11 +39,11 @@ class AttractionFragment : ListFragment() {
         }
         listView.setOnItemClickListener { parent, view, position, id ->
             val attraction = adapter.getItem(position)
-            if (attraction.url != "") {
+            if (attraction.FacilityURLSP != "") {
                 val intent = CustomTabsIntent.Builder()
                         .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
-                intent.launchUrl(activity, Uri.parse(attraction.url))
+                intent.launchUrl(activity, Uri.parse(attraction.FacilityURLSP))
             }
         }
     }
