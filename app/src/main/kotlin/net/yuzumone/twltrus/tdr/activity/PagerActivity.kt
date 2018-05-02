@@ -77,7 +77,7 @@ class PagerActivity : AppCompatActivity() {
                 val showJob = async(CommonPool) { ShowApi.getRealtimeTdl(pref.cookie) }
                 val attractionJob = async(CommonPool) { AttractionApi.getTdl(pref.cookie) }
                 val restaurantJob = async(CommonPool) { RestaurantApi.getTdl() }
-                val greetingJob = async(CommonPool) { GreetingApi.getTdl() }
+                val greetingJob = async(CommonPool) { GreetingApi.getTdl(pref.cookie) }
                 val rehabJob = async(CommonPool) { RehabApi.getTdl() }
                 val shows = showJob.await()
                 val attractions = attractionJob.await()
@@ -115,7 +115,7 @@ class PagerActivity : AppCompatActivity() {
                 val showJob = async(CommonPool) { ShowApi.getRealtimeTds(pref.cookie) }
                 val attractionJob = async(CommonPool) { AttractionApi.getTds(pref.cookie) }
                 val restaurantJob = async(CommonPool) { RestaurantApi.getTds() }
-                val greetingJob = async(CommonPool) { GreetingApi.getTds() }
+                val greetingJob = async(CommonPool) { GreetingApi.getTds(pref.cookie) }
                 val rehabJob = async(CommonPool) { RehabApi.getTds() }
                 val shows = showJob.await()
                 val attractions = attractionJob.await()
