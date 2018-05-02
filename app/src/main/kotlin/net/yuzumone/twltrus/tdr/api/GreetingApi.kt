@@ -1,43 +1,45 @@
 package net.yuzumone.twltrus.tdr.api
 
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
 import net.yuzumone.twltrus.tdr.extension.regularHeader
-import net.yuzumone.twltrus.tdr.model.Greeting
+import net.yuzumone.twltrus.tdr.model.*
 import org.jsoup.Jsoup
-import org.jsoup.select.Elements
 
 object GreetingApi {
 
-    private val randomLat = (Math.random() * 100).toInt()
-    private val randomLng = (Math.random() * 100).toInt()
-    private val tdlUrl = "http://info.tokyodisneyresort.jp/rt/s/gps/tdl_index.html" +
-            "?nextUrl=http://info.tokyodisneyresort.jp/rt/s/realtime/tdl_greeting.html" +
-            "&lat=35.6329$randomLat&lng=139.8840$randomLng"
-    private val tdsUrl = "http://info.tokyodisneyresort.jp/rt/s/gps/tds_index.html" +
-            "?nextUrl=http://info.tokyodisneyresort.jp/rt/s/realtime/tds_greeting.html" +
-            "&lat=35.6329$randomLat&lng=139.8840$randomLng"
+    private const val tdlUrl = "http://www.tokyodisneyresort.jp/_/realtime/tdl_greeting.json"
+    private const val tdsUrl = "http://www.tokyodisneyresort.jp/_/realtime/tds_greeting.json"
 
-    fun getTdl(): List<Greeting> {
-        val doc = Jsoup.connect(tdlUrl).followRedirects(true).regularHeader().get()
-        val list = doc.select("#greeting > section > article.greeting > li")
-        return analysis(list)
+    fun getTdl(cookie: String): List<Greeting> {
+        val body = Jsoup.connect(tdlUrl).cookie("tdrloc", cookie)
+                .followRedirects(true).ignoreContentType(true)
+                .regularHeader().execute().body()
+        val res = getMoshi().adapter(LGreetingResponse::class.java).fromJson(body)!!
+        val list = ArrayList<Greeting>()
+        res.id11?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        res.id13?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        res.id16?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        return list
     }
 
-    fun getTds(): List<Greeting> {
-        val doc = Jsoup.connect(tdsUrl).followRedirects(true).regularHeader().get()
-        val list = doc.select("#greeting > section > article.greeting > li")
-        return analysis(list)
+    fun getTds(cookie: String): List<Greeting> {
+        val body = Jsoup.connect(tdsUrl).cookie("tdrloc", cookie)
+                .followRedirects(true).ignoreContentType(true)
+                .regularHeader().execute().body()
+        val res = getMoshi().adapter(SGreetingResponse::class.java).fromJson(body)!!
+        val list = ArrayList<Greeting>()
+        res.id21?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        res.id22?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        res.id25?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        res.id26?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        res.id27?.let { it.Facility.forEach { if (it.greeting != null) list.add(it.greeting) } }
+        return list
     }
 
-    private fun analysis(list: Elements): List<Greeting> {
-        return list.map { greeting ->
-            val name = greeting.select("h3").text()
-            val left = greeting.select("div.op-left").eachText().joinToString("\n")
-            val right = greeting.select("div.op-right").eachText().joinToString("\n")
-            val wait = greeting.select("p.waitTime").text()
-            val update = greeting.select("p.update").text()
-                    .replace("^\\(|\\)\$".toRegex(), "")
-            val url = greeting.select("a").attr("href")
-            Greeting(name, left, right, wait, update, url)
-        }
+    private fun getMoshi(): Moshi {
+        return Moshi.Builder()
+                .add(KotlinJsonAdapterFactory())
+                .build()
     }
 }
