@@ -39,11 +39,11 @@ class GreetingFragment : ListFragment() {
         }
         listView.setOnItemClickListener { parent, view, position, id ->
             val greeting = adapter.getItem(position)
-            if (greeting.url != "") {
+            if (greeting.FacilityURLSP != "") {
                 val intent = CustomTabsIntent.Builder()
                         .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
-                intent.launchUrl(activity, Uri.parse(greeting.url))
+                intent.launchUrl(activity, Uri.parse(greeting.FacilityName))
             }
         }
     }
