@@ -9,7 +9,8 @@ object DataBindingAdapter {
 
     @BindingAdapter("standby")
     @JvmStatic
-    fun setStandbyTime(view: TextView, standbyTime: String) {
+    fun setStandbyTime(view: TextView, standbyTime: String?) {
+        if (standbyTime == null) return
         view.text = view.context.getString(R.string.standby_time, standbyTime)
     }
 
@@ -18,5 +19,14 @@ object DataBindingAdapter {
     fun setOperatingHours(view: TextView, operatingHours: List<OperatingHours>?) {
         if (operatingHours == null) return
         view.text = operatingHours.joinToString(separator = "\n") { it.OperatingHoursFrom.toString() }
+    }
+
+    @BindingAdapter("greeting")
+    @JvmStatic
+    fun setGreetingOperatingHours(view: TextView, operatingHours: List<OperatingHours>?) {
+        if (operatingHours == null) return
+        view.text = operatingHours.joinToString(separator = "\n") {
+            it.OperatingHoursFrom + " - " + it.OperatingHoursTo + "\t" + it.OperatingStatus
+        }
     }
 }
