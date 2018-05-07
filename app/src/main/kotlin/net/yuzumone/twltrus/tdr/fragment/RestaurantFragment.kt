@@ -39,11 +39,11 @@ class RestaurantFragment : ListFragment() {
         }
         listView.setOnItemClickListener { parent, view, position, id ->
             val restaurant = adapter.getItem(position)
-            if (restaurant.url != "") {
+            if (restaurant.FacilityURLSP != "") {
                 val intent = CustomTabsIntent.Builder()
                         .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
-                intent.launchUrl(activity, Uri.parse(restaurant.url))
+                intent.launchUrl(activity, Uri.parse(restaurant.FacilityURLSP))
             }
         }
     }
