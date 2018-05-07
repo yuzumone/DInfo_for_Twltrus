@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <data>
@@ -20,53 +21,26 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{restaurant.name}"
+            android:text="@{restaurant.facilityName}"
             style="@style/TextAppearance.AppCompat.Title"
             />
 
-        <LinearLayout
-            android:id="@+id/content_run"
+        <TextView
+            android:id="@+id/run"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@+id/name"
-            android:layout_marginTop="8dp"
-            >
-
-            <TextView
-                android:id="@+id/run"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{restaurant.run}"
-                android:visibility='@{restaurant.run  == "" ? View.GONE : View.VISIBLE}'
-                style="@style/TextAppearance.AppCompat.Body1"
-                />
-
-            <TextView
-                android:id="@+id/left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{restaurant.left}"
-                android:visibility='@{restaurant.left  == "" ? View.GONE : View.VISIBLE}'
-                style="@style/TextAppearance.AppCompat.Body1"
-                />
-
-            <TextView
-                android:id="@+id/right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{restaurant.right}"
-                android:visibility='@{restaurant.right  == "" ? View.GONE : View.VISIBLE}'
-                style="@style/TextAppearance.AppCompat.Body1"
-                />
-        </LinearLayout>
+            android:layout_below="@id/name"
+            android:layout_marginTop="4dp"
+            app:restaurant_run="@{restaurant.operatingHours}"
+            style="@style/TextAppearance.AppCompat.Body1"
+            />
 
         <TextView
             android:id="@+id/update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/content_run"
-            android:text="@{restaurant.update}"
+            android:layout_below="@+id/run"
+            android:text="@{`更新時間: ` + restaurant.updateTime}"
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -74,9 +48,9 @@
             android:id="@+id/wait"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{restaurant.wait}"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+            app:restaurant_standby="@{restaurant}"
             style="@style/TextAppearance.AppCompat.Headline"
             />
     </RelativeLayout>
