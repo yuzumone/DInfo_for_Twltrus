@@ -4,41 +4,41 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Restaurant(
-        val name: String,
-        val wait: String,
-        val run: String,
-        val left: String,
-        val right: String,
-        val update: String,
-        val url: String) : Parcelable {
+        val FacilityName: String,
+        val FacilityURLSP: String?,
+        val StandbyTimeMin: String?,
+        val StandbyTimeMax: String?,
+        val UpdateTime: String,
+        val operatingHours: List<OperatingHours>?
+) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.createTypedArrayList(OperatingHours))
 
-    constructor(source: Parcel) : this(
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString(),
-            source.readString()
-    )
-
-    override fun describeContents() = 0
-
-    override fun writeToParcel(dest: Parcel, flags: Int) = with(dest) {
-        writeString(name)
-        writeString(wait)
-        writeString(run)
-        writeString(left)
-        writeString(right)
-        writeString(update)
-        writeString(url)
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(FacilityName)
+        parcel.writeString(FacilityURLSP)
+        parcel.writeString(StandbyTimeMin)
+        parcel.writeString(StandbyTimeMax)
+        parcel.writeString(UpdateTime)
+        parcel.writeTypedList(operatingHours)
     }
 
-    companion object {
-        @JvmField
-        val CREATOR: Parcelable.Creator<Restaurant> = object : Parcelable.Creator<Restaurant> {
-            override fun createFromParcel(source: Parcel): Restaurant = Restaurant(source)
-            override fun newArray(size: Int): Array<Restaurant?> = arrayOfNulls(size)
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Restaurant> {
+        override fun createFromParcel(parcel: Parcel): Restaurant {
+            return Restaurant(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Restaurant?> {
+            return arrayOfNulls(size)
         }
     }
 }
