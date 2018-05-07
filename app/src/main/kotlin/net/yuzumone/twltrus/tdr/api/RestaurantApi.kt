@@ -1,44 +1,42 @@
 package net.yuzumone.twltrus.tdr.api
 
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import net.yuzumone.twltrus.tdr.extension.regularHeader
+import net.yuzumone.twltrus.tdr.model.Attraction
 import net.yuzumone.twltrus.tdr.model.Restaurant
+import net.yuzumone.twltrus.tdr.moshi.StandbyTimeAdapter
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 
 object RestaurantApi {
 
-    private val randomLat = (Math.random() * 100).toInt()
-    private val randomLng = (Math.random() * 100).toInt()
-    private val tdlUrl = "http://info.tokyodisneyresort.jp/rt/s/gps/tdl_index.html" +
-            "?nextUrl=http://info.tokyodisneyresort.jp/rt/s/realtime/tdl_restaurant.html" +
-            "&lat=35.6329$randomLat&lng=139.8840$randomLng"
-    private val tdsUrl = "http://info.tokyodisneyresort.jp/rt/s/gps/tds_index.html" +
-            "?nextUrl=http://info.tokyodisneyresort.jp/rt/s/realtime/tds_restaurant.html" +
-            "&lat=35.6329$randomLat&lng=139.8840$randomLng"
+    private const val tdlUrl = "http://www.tokyodisneyresort.jp/_/realtime/tdl_restaurant.json"
+    private const val tdsUrl = "http://www.tokyodisneyresort.jp/_/realtime/tds_restaurant.json"
 
-    fun getTdl(): List<Restaurant> {
-        val doc = Jsoup.connect(tdlUrl).followRedirects(true).regularHeader().get()
-        val list = doc.getElementsByClass("schedule").select("li")
-        return analysis(list)
+    fun getTdl(cookie: String): List<Restaurant> {
+        val body = Jsoup.connect(tdlUrl).cookie("tdrloc", cookie)
+                .followRedirects(true).ignoreContentType(true)
+                .regularHeader().execute().body()
+        return analysis(body)
     }
 
-    fun getTds(): List<Restaurant> {
-        val doc = Jsoup.connect(tdsUrl).followRedirects(true).regularHeader().get()
-        val list = doc.getElementsByClass("schedule").select("li")
-        return analysis(list)
+    fun getTds(cookie: String): List<Restaurant> {
+        val body = Jsoup.connect(tdsUrl).cookie("tdrloc", cookie)
+                .followRedirects(true).ignoreContentType(true)
+                .regularHeader().execute().body()
+        return analysis(body)
     }
 
-    private fun analysis(list: Elements): List<Restaurant> {
-        return list.map { restaurant ->
-            val name = restaurant.select("h3").text()
-            val waitTime = restaurant.select("p.waitTime").text()
-            val run = restaurant.select("p.run").text()
-            val left = restaurant.select("div.op-left").text()
-            val right = restaurant.select("div.op-right").text()
-            val update = restaurant.select("p.update").text()
-                    .replace("^\\(|\\)\$".toRegex(), "")
-            val url = restaurant.select("a").attr("href")
-            Restaurant(name, waitTime, run, left, right, update, url)
-        }
+    private fun analysis(json: String): List<Restaurant> {
+        val moshi = Moshi.Builder()
+                .add(KotlinJsonAdapterFactory())
+                .build()
+        val type = Types.newParameterizedType(List::class.java, Restaurant::class.java)
+        val adapter: JsonAdapter<List<Restaurant>> = moshi.adapter(type)
+        return adapter.fromJson(json)!!
     }
+
 }
