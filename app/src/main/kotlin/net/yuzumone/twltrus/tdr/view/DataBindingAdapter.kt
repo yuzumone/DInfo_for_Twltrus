@@ -8,26 +8,15 @@ import net.yuzumone.twltrus.tdr.model.Restaurant
 
 object DataBindingAdapter {
 
-    @BindingAdapter("standby")
-    @JvmStatic
-    fun setStandbyTime(view: TextView, standbyTime: String?) {
-        if (standbyTime == null) return
-        view.text = view.context.getString(R.string.standby_time, standbyTime)
-    }
-
     @BindingAdapter("operatingHours")
     @JvmStatic
     fun setOperatingHours(view: TextView, operatingHours: List<OperatingHours>?) {
-        if (operatingHours == null) return
-        view.text = operatingHours.joinToString(separator = "\n") { it.OperatingHoursFrom.toString() }
-    }
-
-    @BindingAdapter("greeting")
-    @JvmStatic
-    fun setGreetingOperatingHours(view: TextView, operatingHours: List<OperatingHours>?) {
-        if (operatingHours == null) return
+        operatingHours ?: return
         view.text = operatingHours.joinToString(separator = "\n") {
-            it.OperatingHoursFrom + " - " + it.OperatingHoursTo + "\t" + it.OperatingStatus
+            val start = it.OperatingHoursFrom ?: ""
+            val end = it.OperatingHoursTo ?: ""
+            val status = it.OperatingStatus ?: ""
+            "$start - $end \t $status"
         }
     }
 
@@ -44,15 +33,4 @@ object DataBindingAdapter {
         }
     }
 
-    @BindingAdapter("restaurant_run")
-    @JvmStatic
-    fun setRestaurantRun(view: TextView, operatingHours: List<OperatingHours>?) {
-        operatingHours ?: return
-        view.text = operatingHours.joinToString(separator = "\n") {
-            val start = it.OperatingHoursFrom ?: ""
-            val end = it.OperatingHoursTo ?: ""
-            val status = it.OperatingStatus ?: ""
-            "$start - $end \t $status"
-        }
-    }
 }

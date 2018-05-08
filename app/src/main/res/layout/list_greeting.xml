@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_marginTop="8dp"
-            app:greeting="@{greeting.operatinghours}"
+            app:operatingHours="@{greeting.operatinghours}"
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
@@ -51,7 +51,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:visibility='@{greeting.standbyTime == "" ? View.GONE : View.VISIBLE}'
-            app:standby="@{greeting.standbyTime}"
+            android:text="@{@string/standby_time(greeting.standbyTime)}"
             style="@style/TextAppearance.AppCompat.Headline"
             />
     </RelativeLayout>
