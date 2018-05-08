@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:visibility='@{greeting.standbyTime == "" ? View.GONE : View.VISIBLE}'
+            android:visibility='@{greeting.standbyTime == null ? View.GONE : View.VISIBLE}'
             android:text="@{@string/standby_time(greeting.standbyTime)}"
             style="@style/TextAppearance.AppCompat.Headline"
             />
