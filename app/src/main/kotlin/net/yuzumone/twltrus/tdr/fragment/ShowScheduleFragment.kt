@@ -53,7 +53,7 @@ class ShowScheduleFragment : Fragment() {
     private fun initView() {
         adapter = ShowAdapter(activity!!)
         binding.list.adapter = adapter
-        binding.list.setOnItemClickListener { adapterView, view, position, id ->
+        binding.list.setOnItemClickListener { _, _, position, _ ->
             val show = adapter.getItem(position)
             if (show.url != "") {
                 val intent = CustomTabsIntent.Builder()

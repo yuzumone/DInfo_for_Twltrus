@@ -37,9 +37,9 @@ class RestaurantFragment : ListFragment() {
             val view = LayoutInflater.from(activity).inflate(R.layout.view_no_data, listView, false)
             listView.addHeaderView(view)
         }
-        listView.setOnItemClickListener { parent, view, position, id ->
+        listView.setOnItemClickListener { _, _, position, _ ->
             val restaurant = adapter.getItem(position)
-            if (restaurant.FacilityURLSP != "") {
+            if (!restaurant.FacilityURLSP.isNullOrBlank()) {
                 val intent = CustomTabsIntent.Builder()
                         .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
