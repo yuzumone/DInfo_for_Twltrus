@@ -61,7 +61,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:visibility='@{attraction.standbyTime == "" ? View.GONE : View.VISIBLE}'
-            app:standby="@{attraction.standbyTime}"
+            android:text="@{@string/standby_time(attraction.standbyTime)}"
             style="@style/TextAppearance.AppCompat.Headline"
             />
     </RelativeLayout>

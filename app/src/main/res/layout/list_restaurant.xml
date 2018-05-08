@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
             android:layout_marginTop="4dp"
-            app:restaurant_run="@{restaurant.operatingHours}"
+            app:operatingHours="@{restaurant.operatingHours}"
             style="@style/TextAppearance.AppCompat.Body1"
             />
 
