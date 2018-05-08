@@ -32,7 +32,7 @@ class RehabFragment : ListFragment() {
         adapter.addAll(shows)
         adapter.notifyDataSetChanged()
         listAdapter = adapter
-        listView.setOnItemClickListener { parent, view, position, id ->
+        listView.setOnItemClickListener { _, _, position, _ ->
             val rehab = adapter.getItem(position)
             if (rehab.url != "") {
                 val intent = CustomTabsIntent.Builder()

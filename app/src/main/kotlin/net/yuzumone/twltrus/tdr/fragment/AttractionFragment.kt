@@ -37,9 +37,9 @@ class AttractionFragment : ListFragment() {
             val view = LayoutInflater.from(activity).inflate(R.layout.view_no_data, listView, false)
             listView.addHeaderView(view)
         }
-        listView.setOnItemClickListener { parent, view, position, id ->
+        listView.setOnItemClickListener { _, _, position, _ ->
             val attraction = adapter.getItem(position)
-            if (attraction.FacilityURLSP != "") {
+            if (!attraction.FacilityURLSP.isNullOrBlank()) {
                 val intent = CustomTabsIntent.Builder()
                         .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()

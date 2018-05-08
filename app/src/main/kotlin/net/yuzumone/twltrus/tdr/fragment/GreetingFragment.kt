@@ -37,13 +37,13 @@ class GreetingFragment : ListFragment() {
             val view = LayoutInflater.from(activity).inflate(R.layout.view_no_data, listView, false)
             listView.addHeaderView(view)
         }
-        listView.setOnItemClickListener { parent, view, position, id ->
+        listView.setOnItemClickListener { _, _, position, _ ->
             val greeting = adapter.getItem(position)
-            if (greeting.FacilityURLSP != "") {
+            if (!greeting.FacilityURLSP.isNullOrBlank()) {
                 val intent = CustomTabsIntent.Builder()
                         .setToolbarColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
                         .build()
-                intent.launchUrl(activity, Uri.parse(greeting.FacilityName))
+                intent.launchUrl(activity, Uri.parse(greeting.FacilityURLSP))
             }
         }
     }
