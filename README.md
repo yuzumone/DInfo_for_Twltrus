@@ -2,7 +2,7 @@
 [![platform android](https://img.shields.io/badge/platform-android-green.svg)](#)
 [![language kotlin](https://img.shields.io/badge/language-kotlin-green.svg)](#)
 [![minSdkVersion 25](https://img.shields.io/badge/minSdkVersion-25-red.svg)](#)
-[![version v1.0.5](https://img.shields.io/badge/version-v1.0.5-blue.svg)](#)
+[![version v1.0.6](https://img.shields.io/badge/version-v1.0.6-blue.svg)](#)
 
 This app is Twltrus plugin which displays information of Tokyo Disney Resort.  
 When installed it will be added to App Shortcuts.
@@ -18,10 +18,10 @@ When installed it will be added to App Shortcuts.
 This project uses some libraries.
 
 - Android Support Libraries
-- Android Data Binding Compiler
 - Kotlin Standard Library
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - [jsoup](https://jsoup.org/)
+- [moshi](https://github.com/square/moshi)
 
 ## License
 ```
