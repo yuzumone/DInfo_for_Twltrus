@@ -23,3 +23,22 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn org.jetbrains.annotations.**
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keep @com.squareup.moshi.JsonQualifier interface *
+-keep class kotlin.Metadata { *; }
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+-keepclassmembers class * {
+    @com.squareup.moshi.FromJson <methods>;
+    @com.squareup.moshi.ToJson <methods>;
+}
+-keepnames @kotlin.Metadata class net.yuzumone.twltrus.tdr.model.**
+-keep class net.yuzumone.twltrus.tdr.model.** { *; }
+-keepclassmembers class net.yuzumone.twltrus.tdr.model.** { *; }
