@@ -36,10 +36,20 @@
             />
 
         <TextView
+            android:id="@+id/popcorn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{restaurant.popCornFlavors == null ? View.GONE : View.VISIBLE}"
+            android:text="@{`ポップコーン: ` + restaurant.popCornFlavors}"
+            android:layout_below="@+id/run"
+            style="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <TextView
             android:id="@+id/update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/run"
+            android:layout_below="@+id/popcorn"
             android:text="@{`更新時間: ` + restaurant.updateTime}"
             style="@style/TextAppearance.AppCompat.Body1"
             />
