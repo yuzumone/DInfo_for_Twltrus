@@ -25,8 +25,11 @@ object DataBindingAdapter {
     fun setRestaurantStandbyTime(view:TextView, restaurant: Restaurant) {
         val max = restaurant.StandbyTimeMax
         val min = restaurant.StandbyTimeMin
-        if (max == null || min == null) return
-        if (max.toInt() == min.toInt()) {
+        if (max == null && min == null) {
+            view.text = ""
+        } else if (max == null) {
+            view.text = view.context.getString(R.string.over_standby_time, min)
+        } else if (max == min) {
             view.text = view.context.getString(R.string.standby_time, min)
         } else {
             view.text = view.context.getString(R.string.diff_standby_time, min, max)
