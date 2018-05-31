@@ -8,10 +8,12 @@ data class Restaurant(
         val FacilityURLSP: String?,
         val StandbyTimeMin: String?,
         val StandbyTimeMax: String?,
+        val PopCornFlavors: String?,
         val UpdateTime: String,
         val operatingHours: List<OperatingHours>?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -24,6 +26,7 @@ data class Restaurant(
         parcel.writeString(FacilityURLSP)
         parcel.writeString(StandbyTimeMin)
         parcel.writeString(StandbyTimeMax)
+        parcel.writeString(PopCornFlavors)
         parcel.writeString(UpdateTime)
         parcel.writeTypedList(operatingHours)
     }
