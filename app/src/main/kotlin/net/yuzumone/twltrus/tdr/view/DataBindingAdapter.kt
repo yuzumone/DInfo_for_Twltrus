@@ -1,6 +1,6 @@
 package net.yuzumone.twltrus.tdr.view
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.widget.TextView
 import net.yuzumone.twltrus.tdr.R
 import net.yuzumone.twltrus.tdr.model.OperatingHours
