@@ -1,64 +1,61 @@
-package net.yuzumone.twltrus.tdr.ui
+package net.yuzumone.twltrus.tdr.ui.detail
 
-import android.content.Context
-import android.content.Intent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.util.Log
+import android.view.*
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import net.yuzumone.twltrus.tdr.R
-import net.yuzumone.twltrus.tdr.ui.common.PagerAdapter
 import net.yuzumone.twltrus.tdr.data.api.*
-import net.yuzumone.twltrus.tdr.databinding.ActivityPagerBinding
-import net.yuzumone.twltrus.tdr.utils.convertArrayList
+import net.yuzumone.twltrus.tdr.databinding.FragmentDetailBinding
 import net.yuzumone.twltrus.tdr.model.Park
-import net.yuzumone.twltrus.tdr.ui.detail.*
+import net.yuzumone.twltrus.tdr.ui.common.PagerAdapter
 import net.yuzumone.twltrus.tdr.utils.PrefUtil
+import net.yuzumone.twltrus.tdr.utils.convertArrayList
 
-class PagerActivity : AppCompatActivity() {
+class DetailFragment : Fragment() {
 
-    private lateinit var binding: ActivityPagerBinding
+    private lateinit var binding: FragmentDetailBinding
     private val park: Park by lazy {
-        intent.extras.getSerializable(ARG_PARK) as Park
+        arguments!!.getSerializable(ARG_PARK) as Park
     }
     private val adapter: PagerAdapter by lazy {
-        PagerAdapter(supportFragmentManager)
+        PagerAdapter(fragmentManager!!)
     }
-    private val pref by lazy { PrefUtil(this) }
+    private val pref by lazy { PrefUtil(activity!!) }
 
     companion object {
         private const val ARG_PARK = "park"
-        fun createIntent(context: Context, park: Park) {
-            val intent = Intent(context, PagerActivity::class.java)
-            intent.putExtra(ARG_PARK, park)
-            context.startActivity(intent)
+        fun newInstance(park: Park): DetailFragment {
+            return DetailFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_PARK, park)
+                }
+            }
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_pager)
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
         binding.pager.adapter = adapter
         binding.tab.setupWithViewPager(binding.pager)
+        setHasOptionsMenu(true)
         refresh()
+        return binding.root
     }
 
     private fun refresh() {
         adapter.clear()
         if (park == Park.TDL) {
-            setTitle(R.string.tdl)
+            activity!!.setTitle(R.string.tdl)
             getTDL()
         } else if (park == Park.TDS) {
-            setTitle(R.string.tds)
+            activity!!.setTitle(R.string.tds)
             getTDS()
         }
     }
@@ -94,9 +91,10 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.restaurant), restaurantFragment)
                 adapter.add(getString(R.string.greeting), greetingFragment)
                 adapter.add(getString(R.string.rehab), rehabFragment)
+                binding.pager.adapter = adapter
             }
         } catch (e: Exception) {
-            Toast.makeText(this@PagerActivity, R.string.no_data, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.no_data, Toast.LENGTH_SHORT).show()
         }
         binding.progress.visibility = View.GONE
     }
@@ -132,24 +130,21 @@ class PagerActivity : AppCompatActivity() {
                 adapter.add(getString(R.string.restaurant), restaurantFragment)
                 adapter.add(getString(R.string.greeting), greetingFragment)
                 adapter.add(getString(R.string.rehab), rehabFragment)
+                binding.pager.adapter = adapter
             }
         } catch (e: Exception) {
-            Toast.makeText(this@PagerActivity, R.string.no_data, Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.no_data, Toast.LENGTH_SHORT).show()
         }
         binding.progress.visibility = View.GONE
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_pager, menu)
-        return super.onCreateOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater!!.inflate(R.menu.menu_pager, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
             R.id.menu_refresh -> {
                 refresh()
                 return true

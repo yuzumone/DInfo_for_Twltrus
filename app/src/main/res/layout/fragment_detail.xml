@@ -16,19 +16,10 @@
             android:layout_centerInParent="true"
             />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:theme="@style/Toolbar"
-            android:elevation="8dp"
-            />
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
             android:background="@color/colorPrimary"
             android:elevation="8dp"
             app:tabBackground="@color/colorPrimary"
