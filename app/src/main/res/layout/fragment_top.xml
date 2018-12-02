@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+
+        <LinearLayout
+            android:id="@+id/container_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            >
+
+            <Button
+                android:id="@+id/button_tdl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/TDLButton"
+                android:text="@string/tdl"
+                />
+
+            <Button
+                android:id="@+id/button_tds"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:theme="@style/TDSButton"
+                android:text="@string/tds"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_tdl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:layout_below="@id/container_button"
+            android:text="@string/tdl"
+            android:textColor="@color/md_pink_500"
+            style="@style/TextAppearance.AppCompat.Title"
+            />
+
+        <TextView
+            android:id="@+id/text_tdl_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@id/text_tdl"
+            style="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <TextView
+            android:id="@+id/text_tds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:layout_below="@+id/text_tdl_status"
+            android:text="@string/tds"
+            android:textColor="@color/md_blue_500"
+            style="@style/TextAppearance.AppCompat.Title"
+            />
+
+        <TextView
+            android:id="@+id/text_tds_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_below="@id/text_tds"
+            style="@style/TextAppearance.AppCompat.Body1"
+            />
+    </RelativeLayout>
+</layout>
