@@ -4,26 +4,26 @@ import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import android.view.View
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import net.yuzumone.twltrus.tdr.R
-import net.yuzumone.twltrus.tdr.R.string.refresh
-import net.yuzumone.twltrus.tdr.data.api.CookieApi
-import net.yuzumone.twltrus.tdr.data.api.StatusApi
 import net.yuzumone.twltrus.tdr.databinding.ActivityMainBinding
-import net.yuzumone.twltrus.tdr.model.Park
+import net.yuzumone.twltrus.tdr.ui.detail.DetailFragment
 import net.yuzumone.twltrus.tdr.ui.top.TopFragment
-import net.yuzumone.twltrus.tdr.utils.PrefUtil
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var model: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        model = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        model.transaction.observe(this, Observer {
+            val fragment = DetailFragment.newInstance(it)
+            supportFragmentManager.beginTransaction().replace(R.id.content, fragment)
+                    .addToBackStack(null).commit()
+        })
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
         supportFragmentManager.addOnBackStackChangedListener {
