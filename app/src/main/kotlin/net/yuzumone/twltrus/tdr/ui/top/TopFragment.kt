@@ -5,39 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
-import net.yuzumone.twltrus.tdr.R
 import net.yuzumone.twltrus.tdr.data.api.CookieApi
 import net.yuzumone.twltrus.tdr.data.api.StatusApi
 import net.yuzumone.twltrus.tdr.databinding.FragmentTopBinding
-import net.yuzumone.twltrus.tdr.model.Park
-import net.yuzumone.twltrus.tdr.ui.detail.DetailFragment
+import net.yuzumone.twltrus.tdr.ui.MainViewModel
 import net.yuzumone.twltrus.tdr.utils.PrefUtil
 import java.util.*
 
 class TopFragment : Fragment() {
 
     private lateinit var binding: FragmentTopBinding
+    private lateinit var mainViewModel: MainViewModel
     private val pref by lazy { PrefUtil(activity!!) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = FragmentTopBinding.inflate(inflater, container, false)
+        mainViewModel = ViewModelProviders.of(activity!!).get(MainViewModel::class.java)
+        binding = FragmentTopBinding.inflate(inflater, container, false).apply {
+            viewModel = mainViewModel
+        }
         getStatus()
-        binding.buttonTdl.setOnClickListener {
-            val fragment = DetailFragment.newInstance(Park.TDL)
-            requireFragmentManager().run {
-                beginTransaction().replace(R.id.content, fragment).addToBackStack(null).commit()
-            }
-        }
-        binding.buttonTds.setOnClickListener {
-            val fragment = DetailFragment.newInstance(Park.TDS)
-            requireFragmentManager().run {
-                beginTransaction().replace(R.id.content, fragment).addToBackStack(null).commit()
-            }
-        }
         return binding.root
     }
 

@@ -2,6 +2,13 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
+
+    <data>
+        <variable
+            name="viewModel"
+            type="net.yuzumone.twltrus.tdr.ui.MainViewModel"/>
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,6 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="@{() -> viewModel.actionTdl()}"
                 android:theme="@style/TDLButton"
                 android:text="@string/tdl"
                 />
@@ -36,6 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="@{() -> viewModel.actionTds()}"
                 android:theme="@style/TDSButton"
                 android:text="@string/tds"
                 />
